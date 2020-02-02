@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 public class InputServlet2 extends HttpServlet {
 
 	public void init(ServletConfig config) throws ServletException {
-		System.out.println("init ½ÇÇà");
+		System.out.println("init Â½Ã‡Ã‡Ã ");
 	}
 	public void destroy() {
 	}
@@ -21,7 +21,7 @@ public class InputServlet2 extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		
-		Enumeration enu = request.getAttributeNames();
+		Enumeration enu = request.getParameterNames();
 		while(enu.hasMoreElements()) {
 			String name = (String)enu.nextElement();
 			String[] values = request.getParameterValues(name);
