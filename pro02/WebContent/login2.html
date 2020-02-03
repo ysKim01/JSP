@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>로그인 창</title>
+<script>
+	function fn_validate(){
+		var frmLogin = document.frmLogin; //form 태그안에 name 속성으로 객체를 가져온다.
+		var user_id = frmLogin.user_id.value;
+		var user_pw = frmLogin.user_pw.value;
+		
+		if(user_id.length==0 || user_id==""){
+			alert("아이디를 입력하세요.");
+		}else if(user_pw.length==0 || user_pw==""){
+			alert("비밀번호를 입력하세요.");
+		}else{
+			frmLogin.method="post";
+			frmLogin.action="login5";
+			frmLogin.submit();
+		}
+	
+	}
+</script>
+</head>
+<body>
+	<form name='frmLogin' method='post' action='login5' enctype="utf-8">
+		아이디 : <input type='text' name='user_id'><br>
+		패스워드 : <input type='password' name='user_pw'><br>
+		<input type='button' onClick='fn_validate()' value='로그인'>
+		<input type='reset' value='다시 입력'>
+		<input type='hidden' name='user_address' value='서울시 종로구'>
+	</form>
+</body>
+</html>
