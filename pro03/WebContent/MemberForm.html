@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>회원가입</title>
+<script>
+	function fn_sendMember(){
+		var frmMember = document.frmMember;
+		var id = frmMember.id.value;
+		var pw = frmMember.pw.value;
+		var name = frmMember.name.value;
+		var email = frmMember.email.value;
+		
+		if(id.length==0 || id==""){
+			alert("아이디를 입력하십시오.");
+			frmMember.id.focus();
+		}else if(pw.length==0 || pw==""){
+			alert("패스워드를 입력하십시오.");
+			frmMember.pw.focus();
+		}else if(name.length==0 || name==""){
+			alert("이름을 입력하십시오.");
+			frmMember.name.focus();
+		}else if(email.length==0 || email==""){
+			alert("이메일을 입력하십시오.");
+			frmMember.email.focus();
+		}else{
+			frmMember.method = "post";
+			frmMember.action = "member4";
+			frmMember.submit();
+		}
+	}
+</script>
+</head>
+<body>
+	<form name='frmMember'>
+		<table>
+			<th>회원가입창</th>
+			<tr>
+				<td>아이디</td>
+				<td><input type='text' name='id'></td>
+			</tr>
+			<tr>
+				<td>패스워드</td>
+				<td><input type='password' name='pw'></td>
+			</tr>
+			<tr>
+				<td>이름</td>
+				<td><input type='text' name='name'></td>
+			</tr>
+			<tr>
+				<td>이메일</td>
+				<td><input type="text" name='email'></td>
+			</tr>
+		</table>
+		<input type='button' value='가입하기' onclick='fn_sendMember()'>
+		<input type='reset' value='다시입력'>
+		<input type='hidden' name='command' value='addMember'>
+	</form>
+</body>
+</html>
