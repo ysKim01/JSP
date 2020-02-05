@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<context>
+	<Resource
+		name="aaa"
+		driverClassName="oracle.jdbc.driver.OracleDriver"
+		auth="Container"
+		type="javax.sql.DataSource"
+		url="jdbc:oracle:thin:@192.168.100.10:1521:XE"
+		username="kgitbank"
+		password="itbank"
+		maxActive="50"
+		maxWait="-1"
+	/>
+</context>

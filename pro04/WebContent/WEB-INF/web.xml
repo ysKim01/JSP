@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>pro04</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <context-param>
+  	<param-name>menu_member</param-name>
+  	<param-value>회원등록 회원조회 회원수정</param-value>
+  </context-param>
+  <context-param>
+  	<param-name>menu_order</param-name>
+  	<param-value>주문등록 주문조회 주문수정 주문취소</param-value>
+  </context-param>
+  <context-param>
+  	<param-name>menu_goods</param-name>
+  	<param-value>상품등록 상품조회 상품수정 상품삭제</param-value>
+  </context-param>
+  
+  <servlet>
+  	<servlet-name>init</servlet-name>
+  	<servlet-class>sec06.ex01.InitParamServlet2</servlet-class>
+  	<init-param>
+  		<param-name>email</param-name>
+  		<param-value>dudtkd4567@naver.com</param-value>
+  	</init-param>
+  	<init-param>
+  		<param-name>tel</param-name>
+  		<param-value>010-3333-4444</param-value>
+  	</init-param>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>init</servlet-name> 
+  	<url-pattern>/init3</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>init</servlet-name> 
+  	<url-pattern>/init4</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>loadConfig</servlet-name>
+  	<servlet-class>sec06.ex02.LoadAppConfig2</servlet-class>
+  	<load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>loadConfig</servlet-name> 
+  	<url-pattern>/loadconfig2</url-pattern>
+  </servlet-mapping>
+</web-app>
