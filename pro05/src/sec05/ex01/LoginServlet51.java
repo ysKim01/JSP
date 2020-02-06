@@ -1,17 +1,17 @@
-package sec01.ex02;
+package sec05.ex01;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.URLEncoder;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-@WebServlet("/login12")
-public class LoginServlet12 extends HttpServlet{
+@WebServlet("/login51")
+public class LoginServlet51 extends HttpServlet {
 	public void init() throws ServletException {
 		System.out.println("LoginServlet Init");
 	}
@@ -35,30 +35,34 @@ public class LoginServlet12 extends HttpServlet{
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		
-		String id = request.getParameter("user_id");
-		String pw = request.getParameter("user_pw");
-		String address = request.getParameter("user_address");
-		String email = request.getParameter("user_email");
-		String hp = request.getParameter("user_hp");
+		String user_id = request.getParameter("user_id");
+		String user_pw = request.getParameter("user_pw");
 		
-		out.print("<html><body>");
-		out.print("¾ÆÀÌµğ : " + id + "<br>");
-		out.print("ÆĞ½º¿öµå : " + pw + "<br>");
-		out.print("ÁÖ¼Ò : " + address + "<br>");
-		out.print("ÀÌ¸ŞÀÏ : " + email + "<br>");
-		out.print("ÀüÈ­¹øÈ£ : " + hp + "<br>");
+		MemberVO memberVO = new MemberVO();
+		memberVO.setId(user_id);
+		memberVO.setPw(user_pw);
+
+		MemberDAO dao = new MemberDAO();
 		
-		// get ¹æ½ÄÀ¸·Î ÇÑ±ÛÀ» Àü¼ÛÇÏ±â À§ÇÑ ¾ÏÈ£È­ - get¹æ½ÄÀº ÇÑ±ÛÀ» ÀÎ½Ä¸øÇÔ
-		address = URLEncoder.encode(address, "utf-8");
-		out.print("<a href='/pro05/second12?"
-				+ "user_id=" + id
-				+ "&user_pw=" + pw
-				+ "&user_address=" + address
-				+ "'>Àü¼Û</a>"
-				);
+		boolean result = dao.isExisted(memberVO);
+		if(result) {
+			HttpSession session = request.getSession();
+			session.setAttribute("isLogon", true);
+			session.setAttribute("login.id", user_id);
+			session.setAttribute("login.pw", user_pw);
+			
+			out.print("<html><body>");
+			out.print("ì•ˆë…•í•˜ì„¸ìš”  " + user_id + "ë‹˜!!<br>");
+			out.print("<a href='show'>íšŒì›ì •ë³´ë³´ê¸°</a>");
+			out.print("</body></html>");
+		}else {
+			out.print("<html><body>");
+			out.print("íšŒì› ì •ë³´ê°€ í‹€ë ¸ìŠµë‹ˆë‹¤.<br>");
+			out.print("<a href='login3.html'>ë¡œê·¸ì¸ ì°½</a>");
+			out.print("</body></html>");
+		}
 		
-		out.print("</body></html>");
-		out.close();
+		
 		System.out.println("LoginServlet doHandle End");
 	}
 }

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>popup</title>
+<script>
+	function setPopUpStart(obj){
+		if(obj.checked == true){
+			var expireDate = new Date();
+			expireDate.setMonth(expireDate.getMonth()+1); // 쿠키 유효기간 1달 지정
+			document.cookie = "notShowPop=true;path=/; expires="+expireDate.toGMTString();
+			// toGMTString() Date객체의 내용을 읽기 쉽게 GMT형식으로 바꿔준다 > 05 Jan 2002 00:00:00 GMT
+			// 단 GMT는 구식이고 요즘은 UTC를 쓴다.
+		}
+	}
+</script>
+</head>
+<body>
+	알림 팜업창 입니다.
+	<br><br><br><br><br>
+	<form>
+		<input type="checkbox" onclick='setPopUpStart(this)'>
+		오늘 더 이상 팝업창 띄우지 않기
+	</form>
+</body>
+</html>

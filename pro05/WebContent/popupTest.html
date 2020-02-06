@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>popupTest</title>
+<script>
+	window.onload = pageLoad; //브라우저에서 웹 페이지가 로드될 때 pageLoad()를 호출
+	function pageLoad(){	// 저장된 쿠키 가져오기
+		notShowPop = getCookieValue();
+		if(notShowPop != "true"){ // false 일 경우 팝업이 뜬다.
+			window.open("popup.html","pop",
+			"width=400,height=500,history=no,resizable=no,status=no,scrollbars=yes,menubar=no");
+		}
+	}
+	function getCookieValue(){	// 쿠키를 가져오기
+		var result = "false";
+		if(document.cookie != ""){
+			cookie = document.cookie.split(";");
+			for(var i=0;i<cookie.length;i++){
+				element = cookie[i].split("=");
+				value = element[0];
+				value = value.replace(/^\s*/,''); // 정규식 공백제거
+				if(value=="notShowPop"){	// 쿠키 이름이 notShowPop이면 쿠키값 반환
+					result = element[1];
+				}
+			}
+		}
+		return result;
+	}
+	function deleteCookie(){
+		document.cookie = "notShowPop=false;path=/;expires=-1";
+	}
+</script>
+</head>
+<body>
+	<form>
+		<input type="button" value="쿠키삭제" onclick="deleteCookie()">
+	</form>
+</body>
+</html>
