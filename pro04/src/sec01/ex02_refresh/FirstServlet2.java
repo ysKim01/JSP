@@ -33,7 +33,7 @@ public class FirstServlet2 extends HttpServlet {
 		System.out.println("FirstServlet Handle Start");
 		response.setContentType("text/html;charset=utf-8");
 		
-		response.addHeader("Refresh", "1;url=second");
+		response.addHeader("Refresh", "1;url=second"); // 1초 후 , second url로 
 		
 		System.out.println("FirstServlet Handle End");
 	}
