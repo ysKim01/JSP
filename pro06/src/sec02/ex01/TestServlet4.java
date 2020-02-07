@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
-@WebServlet("/*") // 확장자만 일치하는 URL 패턴 > 웹띄우고 url에 *에 아무거나 입력해도 똑같음
+//@WebServlet("/*") // 확장자만 일치하는 URL 패턴 > 웹띄우고 url에 *에 아무거나 입력해도 똑같음
 public class TestServlet4 extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

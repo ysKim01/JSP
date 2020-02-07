@@ -11,7 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet("*.do") // 확장자만 일치하는 URL 패턴 > 웹띄우고 url에 *에 아무거나 입력해도 똑같음
+//@WebServlet("*.do") // 확장자만 일치하는 URL 패턴 > 웹띄우고 url에 *에 아무거나 입력해도 똑같음
+// "/*"에 먹힘 > 확장자만으로는 url을 특정지을 수 없기 때문
 public class TestServlet3 extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -16,7 +16,7 @@ public class LoadAppConfig2 extends HttpServlet {
 	private ServletContext context;
 	
 	public void init(ServletConfig config) throws ServletException {
-		System.out.println("LoadAppConfig Init");
+		System.out.println("LoadAppConfig2 Init");
 		context = config.getServletContext();
 		
 		String menu_member = context.getInitParameter("menu_member");
@@ -54,9 +54,9 @@ public class LoadAppConfig2 extends HttpServlet {
 		
 		
 		out.print("<html><body>");
-		out.print("È¸¿ø¸Þ´º : " + menu_member + "<br>");
-		out.print("ÁÖ¹®¸Þ´º : " + menu_order + "<br>");
-		out.print("»óÇ°¸Þ´º : " + menu_goods + "<br>");
+		out.print("È¸ï¿½ï¿½ï¿½Þ´ï¿½ : " + menu_member + "<br>");
+		out.print("ï¿½Ö¹ï¿½ï¿½Þ´ï¿½ : " + menu_order + "<br>");
+		out.print("ï¿½ï¿½Ç°ï¿½Þ´ï¿½ : " + menu_goods + "<br>");
 		out.print("</body></html>");
 		out.close();
 		

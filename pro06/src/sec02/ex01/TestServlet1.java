@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet("/first/test") // 정확하게 이름까지 일치하는 URL 패턴
+//@WebServlet("/first/test") // 정확하게 이름까지 일치하는 URL 패턴
 public class TestServlet1 extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
