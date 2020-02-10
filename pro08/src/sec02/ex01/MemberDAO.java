@@ -1,4 +1,4 @@
-package sec01.ex04_insert;
+package sec02.ex01;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -99,6 +99,46 @@ public class MemberDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public List<MemberVO> searchMember(MemberVO memberVO) {
+		List<MemberVO> list = new ArrayList<MemberVO>();
+		String inputName = (String)memberVO.getName();
+		try {
+			System.out.println(inputName);
+			con = dataFactory.getConnection();
+			String query = "select * from t_member";
+			if(inputName!=null && inputName.length()!=0) {
+				query += " where name=?";
+				ps = con.prepareStatement(query);
+				ps.setString(1, inputName);
+			}else {
+				ps = con.prepareStatement(query);
+			}
+			
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				String id = rs.getString("id");
+				String pw = rs.getString("pw");
+				String name = rs.getString("name");
+				String email = rs.getString("email");
+				Date joinDate = rs.getDate("joinDate");
+				
+				MemberVO vo = new MemberVO();
+				vo.setId(id);
+				vo.setPw(pw);
+				vo.setName(name);
+				vo.setEmail(email);
+				vo.setJoinDate(joinDate);
+				list.add(vo);
+			}
+			rs.close();
+			ps.close();
+			con.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
 	}
 }
 
