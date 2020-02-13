@@ -1,0 +1,32 @@
+문자열 처리 함수
+- 자바에서 문자열 처리 기능을 jstl에서 함수로 제공한다.
+
+jstl에서 제공하는 여러 가지 문자열 함수
+- fn:contains(A,B) : 문자열 A에 문자열 B가 포함되어
+ 있는지 확인 한다. (boolean)
+- fn:endWith(A,B) : 문자열 A의 끝이 B로 끝나는지 확인
+ 한다. (boolean)
+- fn:indexOf(A,B) : 문자열 A에서 B가 처음으로 위치한
+ 인덱스를 반환한다.(int)
+- fn:length(A) : 문자열 A의 전체 길이를 반환한다.(int)
+- fn:replace(A,B,C) : 문자열 A에서 B까지 해당되는
+ 문자를 찾아 C로 변환한다. (String)
+- fn:toLowerCase(A) : 문자열 A를 모두 소문자로 변환한다.
+- fn:toUpperCase(A) : 문자열 A를 모두 대문자로 변환한다.
+- fn:substing(A,B,C) : A에서 인덱스번호 B에서 C까지
+ 해당하는 문자열을 반환한다.
+- fn:split(A,B) : A에서 B에서 지정한 문자를 기준으로 나
+ 누어 배열로 반환한다.
+- fn:trim(A) : 문자열 A에서 앞뒤 공백을 제거한다.
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
