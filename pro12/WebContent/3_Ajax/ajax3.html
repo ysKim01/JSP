@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>아이디 중복 체크</title>
+<script src='http://code.jquery.com/jquery-latest.min.js'></script>
+<script>
+	function fn_process(){
+		var _id = $("#t_id").val();
+		if(_id==""){
+			alert("ID를 입력하세요");
+			return;
+		}
+		$.ajax({
+			type : "post",
+			async : false,
+			url : "http://localhost:8080/pro12/mem",
+			dataType : "text",
+			data : {id:_id},
+			success : function(data, textStatus){
+				if(data=="NO"){
+					$('#message').text("사용할 수 없는 아이디 입니다.");
+				}else{
+					$('#message').text("사용할 수 있는 아이디 입니다.");
+					$('#btn_duplicate').prop("disabled",true);
+				}
+			},
+			error : function(data, textStatus){
+				alert("에러가 발생했습니다.");
+			},
+			complete : function(data, textStatus){
+				alert("작업이 완료 되었습니다.");
+			}
+		});
+	}
+</script>
+</head>
+<body>
+	<input type='text' id="t_id">
+	<input type='button' id='btn_duplicate' value='아이디 중복확인' onclick='fn_process()'>
+	<br><br>
+	<div id='message'></div>
+</body>
+</html>
