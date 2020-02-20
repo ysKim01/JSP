@@ -146,10 +146,10 @@ public class BoardController extends HttpServlet {
 			List items = upload.parseRequest(request);
 			for(int i=0;i<items.size();i++) {
 				FileItem fileItem = (FileItem) items.get(i);
-				if(fileItem.isFormField()) {
+				if(fileItem.isFormField()) { // 파일 외의 form데이터 일 경우
 					System.out.println(fileItem.getFieldName() + " = " + fileItem.getString(encoding));
 					articleMap.put(fileItem.getFieldName(), fileItem.getString(encoding));
-				}else {
+				}else {	// 파일 데이터 일 경우
 					System.out.println("파라미터명 : " + fileItem.getFieldName());
 					System.out.println("파일명 : " + fileItem.getName());
 					System.out.println("파일 크기 : " + fileItem.getSize() + "Bytes");

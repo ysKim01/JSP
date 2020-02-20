@@ -1,0 +1,3 @@
+- DiskFileFactory : FileItem 오브젝트를 생성하는 클레스
+	- setSizeThreshold(int) : 메모리버퍼의 최대값을 byte로 지정, 업로드할 파일의 용량이 최대치를 넘었을 경우 버퍼내의 데이터는 일시영역으로 보존된다.
+	- setRepository(File) : setSizeThreshold에서 지정한 버퍼 최대값을 넘었을 경우 버퍼내의 데이터를 보존하는 일시영역을 지정한다.
