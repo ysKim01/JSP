@@ -11,6 +11,7 @@
 <head>
 <meta charset="UTF-8">
 <title>글보기</title>
+<script src='http://code.jquery.com/jquery-latest.min.js'></script>
 <script>
 	function backToList(obj){
 		obj.action="${contextPath}/board/listArticles.do";
