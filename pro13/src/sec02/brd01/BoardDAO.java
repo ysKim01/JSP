@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -41,6 +42,57 @@ public class BoardDAO {
 			
 			while(rs.next()) {
 				int level = rs.getInt("level");
+				int articleNO = rs.getInt("articleNO");
+				int parentNO = rs.getInt("parentNO");
+				String title = rs.getString("title");
+				String content = rs.getString("content");
+				String id = rs.getString("id");
+				Date writeDate = rs.getDate("writeDate");
+
+				ArticleVO article = new ArticleVO();
+				
+				article.setLevel(level);
+				article.setArticleNO(articleNO);
+				article.setParentNO(parentNO);
+				article.setTitle(title);
+				article.setContent(content);
+				article.setId(id);
+				article.setWriteDate(writeDate);
+				
+				articlesList.add(article);
+			}
+			con.close();
+			ps.close();
+			rs.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return articlesList;
+	}
+	public List<ArticleVO> selectAllArticles(Map<String, Integer> pagingMap) {
+		List<ArticleVO> articlesList = new ArrayList<ArticleVO>();
+		int section = (Integer)pagingMap.get("section");
+		int pageNum = (Integer)pagingMap.get("pageNum");
+		try {
+			con = dataFactory.getConnection();
+			String query = "select * from (select rowNum as recNum, LVL, "
+					+ " articleNO, parentNO, title, content, id, writeDate "
+					+ " from (select LEVEL as LVL, articleNO, parentNO, title, "
+					+ " content, id, writeDate from t_board"
+					+ " start with parentNO=0 "
+					+ " connect by prior articleNO=parentNO "
+					+ " order siblings by articleNO desc)) "
+					+ " where recNum between(?-1)*100+(?-1)*10+1 and (?-1)*100+?*10"; 
+			ps = con.prepareStatement(query);
+			ps.setInt(1, section);
+			ps.setInt(2, pageNum);
+			ps.setInt(3, section);
+			ps.setInt(4, pageNum);
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				int level = rs.getInt("lvl");
 				int articleNO = rs.getInt("articleNO");
 				int parentNO = rs.getInt("parentNO");
 				String title = rs.getString("title");
@@ -185,4 +237,69 @@ public class BoardDAO {
 		}
 		
 	}
+
+	public List<Integer> selectRemovedArticles(int articleNO) {
+		List<Integer> articleNOList = new ArrayList<Integer>();
+		try {
+			con = dataFactory.getConnection();
+			String sql = "select articleNO from t_board ";
+			sql += " start with articleNO=?";
+			sql += " connect by prior articleNO=parentNO";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, articleNO);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				articleNO = rs.getInt("articleNO");
+				articleNOList.add(articleNO);
+			}
+			ps.close();
+			con.close();
+			rs.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+
+		return articleNOList;
+	}
+
+	public void deleteArticle(int articleNO) {
+		try {
+			con = dataFactory.getConnection();
+			String sql = "delete from t_board"
+					+ " where articleNO in ("
+					+ " select articleNO from t_board "
+					+ " start with articleNO=?"
+					+ " connect by prior articleNO=parentNO)";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, articleNO);
+			ps.executeUpdate();
+			
+			ps.close();
+			con.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public int selectTotArticles() {
+		int result = 0;
+		try {
+			con = dataFactory.getConnection();
+			String query = "select count(articleNO) from t_board";
+			ps = con.prepareStatement(query);
+			ResultSet rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			con.close();
+			ps.close();
+			rs.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+
 }
